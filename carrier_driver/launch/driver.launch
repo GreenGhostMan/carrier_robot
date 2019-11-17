@@ -1,0 +1,19 @@
+<launch>
+	<group ns="carrier_robot">
+
+
+  		<include file="$(find carrier_driver)/launch/urdf.launch" />
+
+ 		<node name="arduino_node" pkg="carrier_driver" type="arduino_node_with_imu_no_rosserial.py" output="screen">
+    		<param name="port" value="/dev/ttyACM0" />
+    		<param name="baudRate" value="115200" />
+  		</node>
+  
+
+  		<!--include file="$(find carrier_driver)/launch/twist.launch"/-->
+  		<include file="$(find carrier_driver)/launch/twist_with_imu.launch"/>
+
+  		<include file="$(find carrier_slam)/launch/carrier_rviz.launch"/>
+
+	</group>
+</launch>
