@@ -15,7 +15,10 @@
 #include <stdio.h>
 
 #define pi 3.1417
-
+	double x= 0;
+	double y= 0;
+	double degree=0;
+	float theta=0.0;
 using namespace std;
 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> move_base;
@@ -26,23 +29,23 @@ int main(int argc,char** argv)
 {
 	ros::init(argc,argv,"nav_test");
 	ros::NodeHandle n;
-	double x= 0;
-	double y= 0;
-if (argc != 3){
-	ROS_INFO("You Can add x,y arguments!");
+
+if (argc != 4){
+	ROS_INFO("rosrun carrier_slam go_degree x y theta !");
+	return -1;
 
 }else{
-	double x= atoll(argv[1]);
-	double y= atoll(argv[2]);
+	x= atoll(argv[1]);
+	y= atoll(argv[2]);
+	degree= atoll(argv[3]); // degree
+	theta = degree * pi/180.0;
 }
 
 
-
+	ROS_INFO_STREAM("X = "<< x << ", Y = " << y <<", radian = "<< theta);
 	geometry_msgs::Quaternion quaternion;
-	double euler_angle=pi;
-
 	
-		quaternion=createQuaternionFromRPY(0,0,euler_angle);
+	quaternion=createQuaternionFromRPY(0,0,theta);
 
 
 	geometry_msgs::Pose waypoints;
@@ -61,7 +64,7 @@ if (argc != 3){
 
 	ROS_INFO("Waiting for move_base action server...");
 
-	move_base.waitForServer(ros::Duration(60));
+	move_base.waitForServer(ros::Duration(5));
 
 	ROS_INFO("Connected to move base server");
 	ROS_INFO("Starting navigation test");

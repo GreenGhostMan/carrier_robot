@@ -75,10 +75,12 @@ int SlaveUpdatePid(int id, int old_pwm, double targetValue, double currentValue)
   float ri =   0.00005;
   float rd =   0.6;
 
-  float lp =   0.65;
-  float li =   0.00005;
-  float ld =   0.6;
-  
+  //float lp =   0.65;
+  //float li =   0.00005;
+  //float ld =   0.6;
+  float lp = 0.45;     //Right 
+  float li =  0.00049;
+  float ld = 1.9;
   error = targetValue-currentValue;
   if (id == 1) { // Right
     int_error1 += error;

@@ -12,7 +12,7 @@ void sendMessage(float y) {
     cmdMessenger.sendCmdArg(rpm_act1);
     cmdMessenger.sendCmdArg(rpm_act2); 
     cmdMessenger.sendCmdArg(y,3);       // Seconds
-    cmdMessenger.sendCmdArg(radian);    // Anguglar Displacement
+    cmdMessenger.sendCmdArg(degree);    // Anguglar Displacement
     cmdMessenger.sendCmdArg(end_bit);
     cmdMessenger.sendCmdEnd();
 //    

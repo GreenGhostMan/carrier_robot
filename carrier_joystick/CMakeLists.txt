@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(carrier_driver)
+project(carrier_joystick)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,17 +8,11 @@ project(carrier_driver)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  actionlib
-  geometry_msgs
-  move_base_msgs
-  nav_msgs
-  robot_state_publisher
   roscpp
   rospy
   sensor_msgs
   std_msgs
-  tf
-  message_generation
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -55,16 +49,11 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-   rpm_req.msg
-   rpm_pid.msg
-   rpm_act.msg
-   rpm.msg
-   vect4.msg
-   vect6.msg
- )
-
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -81,10 +70,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-   DEPENDENCIES
-   geometry_msgs#   sensor_msgs#   std_msgs
- )
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -117,8 +106,8 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES chefbot
-  CATKIN_DEPENDS geometry_msgs roscpp rospy sensor_msgs std_msgs tf message_runtime
+#  LIBRARIES carrier_joystick
+#  CATKIN_DEPENDS roscpp rospy sensor_msgs/Joy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -135,7 +124,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/carrier_driver.cpp
+#   src/${PROJECT_NAME}/carrier_joystick.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -146,7 +135,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/carrier_driver_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/carrier_joystick_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -210,7 +199,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_carrier_driver.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_carrier_joystick.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
@@ -218,21 +207,5 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(carrier_controller src/base_controller.cpp)
-target_link_libraries(carrier_controller ${catkin_LIBRARIES})
-
-add_executable(carrier_controller_imu src/base_controller_with_imu.cpp)
-target_link_libraries(carrier_controller_imu ${catkin_LIBRARIES})
-
-add_executable(carrier_twist_to_motors src/twist_to_motors.cpp)
-target_link_libraries(carrier_twist_to_motors ${catkin_LIBRARIES})
-
-add_executable(carrier_twist_to_motors_imu src/twist_to_motors_imu.cpp)
-target_link_libraries(carrier_twist_to_motors_imu ${catkin_LIBRARIES})
-
-add_executable(carrier_forward_backward src/forward_backward.cpp)
-target_link_libraries(carrier_forward_backward ${catkin_LIBRARIES})
-
-add_executable(carrier_forward_1meter src/forward_1m.cpp)
-target_link_libraries(carrier_forward_1meter ${catkin_LIBRARIES})
-
+add_executable(Joystick src/joystick.cpp)
+target_link_libraries(Joystick ${catkin_LIBRARIES})

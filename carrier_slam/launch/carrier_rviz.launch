@@ -1,3 +1,6 @@
 <launch>
-   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find carrier_slam)/rviz/carrier.rviz" />
+   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find carrier_slam)/rviz/carrier.rviz" >
+   	<remap from="/move_base_simple/goal" to="/carrier_robot/move_base_simple/goal"/>
+   </node>
+
 </launch>

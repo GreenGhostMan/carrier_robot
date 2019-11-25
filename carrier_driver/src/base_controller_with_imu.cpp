@@ -45,7 +45,9 @@ void handle_rpm( const geometry_msgs::Quaternion& Qtype) {
   rpm_act1 = Qtype.x;
   rpm_act2 = Qtype.y;
   rpm_dt = Qtype.z;
-  gyro_theta = Qtype.w;
+  int degree = Qtype.w;
+
+  gyro_theta = degree * pi / 180.0;
   //rpm_time = rpm.header.stamp;
 }
 
@@ -125,14 +127,23 @@ int main(int argc, char** argv){
     // s=r * theta , theta = s/r , theta is always radian
     //dth_odom = (rpm_act1-rpm_act2)*dt*wheel_diameter*pi/(60*track_width);
     current_gyro_theta = gyro_theta; 
-    dth_odom = current_gyro_theta - prev_gyro_theta; // angular_displacement radian
-    prev_gyro_theta = current_gyro_theta;
+    dth_odom = current_gyro_theta - theta; // angular_displacement radian
+    
+    
     //if (use_imu) dth_gyro = dt*gyro_z;
     //dth = alpha*dth_odom + (1-alpha)*dth_gyro;
-    dth = alpha*dth_odom;
-
-    if (dth > 0) dth *= angular_scale_positive;
-    if (dth < 0) dth *= angular_scale_negative;
+    dth = 1.0*dth_odom;
+    
+    if (dth > 0)
+    { 
+      dth *= angular_scale_positive;
+      //ROS_INFO_STREAM("param= "<<angular_scale_positive<<"dth = "<<dth);
+    }
+    if (dth < 0)
+    {
+      //dth = alpha*dth;
+      dth *= angular_scale_negative;
+    } 
     if (dxy_ave > 0) dxy_ave *= linear_scale_positive;
     if (dxy_ave < 0) dxy_ave *= linear_scale_negative;
 //-----------------------------------------------------------------//
@@ -142,6 +153,7 @@ int main(int argc, char** argv){
     x_pos += (cos(theta) * dx - sin(theta) * dy);
     y_pos += (sin(theta) * dx + cos(theta) * dy);
     theta += dth;
+    //theta = current_gyro_theta;
 
     if(theta >= two_pi) theta -= two_pi;
     if(theta <= -two_pi) theta += two_pi;

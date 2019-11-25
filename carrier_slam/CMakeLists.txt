@@ -209,8 +209,8 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(go_pi src/go_pi_radian.cpp)
-target_link_libraries(go_pi ${catkin_LIBRARIES})
+add_executable(go_pose src/go_x_y_degree.cpp)
+target_link_libraries(go_pose ${catkin_LIBRARIES})
 
 # add_executable(square src/square.cpp)
 # target_link_libraries(square ${catkin_LIBRARIES})

@@ -8,16 +8,16 @@
 	    	<!--remap from="cmd_vel" to="cmd_navigation"/-->
 	  	</node>
 
-		<node name="base_controller_node" pkg="carrier_driver" type="carrier_controller_imu">
+		<node name="base_controller_node" pkg="carrier_driver" type="carrier_controller_imu" output="screen">
 		    <param name="publish_tf" value="true" /> <!-- false for ekf -->
 		    <param name="use_imu" value="false" /> <!-- false for only encoder -->
 		    <param name="publish_rate" value="10.0" />
-		    <param name="linear_scale_positive" value="1.0" />
-		    <param name="linear_scale_negative" value="1.0" />
-		    <param name="angular_scale_positive" value="1.0" />
-		    <param name="angular_scale_negative" value="1.0" />
+		    <param name="linear_scale_positive" value="0.8" />
+		    <param name="linear_scale_negative" value="0.75" />
+		    <param name="angular_scale_positive" value="1.6" />
+		    <param name="angular_scale_negative" value="1.6" />
 		    <param name="angular_scale_accel" value="0.0" />
-		    <param name="alpha" value="0.5" />
+		    <param name="alpha" value="0.93" />
 		</node>	
 
 

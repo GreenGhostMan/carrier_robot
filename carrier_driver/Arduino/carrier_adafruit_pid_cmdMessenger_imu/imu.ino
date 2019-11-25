@@ -16,5 +16,5 @@ void updateIMU()
    if(degree > 360) degree = degree%360;
    else if(degree < -360) degree = degree%360;
  
-   radian    = degree * 0.0174532;    // radian = degree * (2*pi / 360.0); 
+   //radian    = degree * 0.0174532;    // radian = degree * (2*pi / 360.0); 
 }

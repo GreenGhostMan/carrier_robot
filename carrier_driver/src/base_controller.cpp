@@ -39,12 +39,6 @@ void handle_rpm( const geometry_msgs::Vector3Stamped& rpm) {
   rpm_dt = rpm.vector.z;
   rpm_time = rpm.header.stamp;
 }
-// void handle_quat( const geometry_msgs::Vector3 gyro) {
-//   //roll = imu.vector.x;
-//   //pitch= imu.vector.y;
-//   //yaw  = imu.vector.z;
-//   gyro_z = gyro.z;
-// }
 
 int main(int argc, char** argv){
   ros::init(argc, argv, "base_controller");

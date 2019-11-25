@@ -44,6 +44,7 @@ class Arduino_Class(object):
 		self.actual_left = 0  # vector y
 		self.time_ = 0.0        # time difference
 		self.theta = 0.0
+		self.degree = 0.0
 		# self.gyro_X = 0.0
 		# self.gyro_Y = 0.0
 		# self.gyro_Z = 0.0
@@ -111,14 +112,14 @@ class Arduino_Class(object):
 					self.actual_right = float(li[1])
 					self.actual_left = float(li[2])
 					self.time_  = float(li[3])
-					self.theta  = float(li[4])
+					self.degree  = float(li[4])
 					#rospy.loginfo(self.time_)
 					#rospy.loginfo("oK i got actual rpm")
 
 					self.QuatTypeData.x = self.actual_right
 					self.QuatTypeData.y = self.actual_left
 					self.QuatTypeData.z = self.time_
-					self.QuatTypeData.w = self.theta
+					self.QuatTypeData.w = self.degree
 					self._Act_publisher.publish(self.QuatTypeData)
 
 				# if(li[0] == '6'):

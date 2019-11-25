@@ -24,15 +24,16 @@ DWAPlannerROS:
   acc_lim_y: 0.0      # diff drive robot
 
 # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.3  # 0.05
-  xy_goal_tolerance: 0.15  # 0.10
-  # latch_xy_goal_tolerance: false
+  yaw_goal_tolerance: 0.0095 #0.039  # 0.05
+  xy_goal_tolerance: 0.10  # 0.10
+  latch_xy_goal_tolerance: ture
 
 # Forward Simulation Parameters
   sim_time: 4.0       # 1.7
   vx_samples: 20       # 3
-  vy_samples: 1       # diff drive robot, there is only one sample
+  vy_samples: 0        # diff drive robot, there is only one sample
   vtheta_samples: 40  # 20
+  sim_granularity: 0.025  #default 0.025
 
 # Trajectory Scoring Parameters
   path_distance_bias: 64.0      # 32.0   - weighting for how much it should stick to the global path plan
